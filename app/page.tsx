@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { json } from "stream/consumers";
 import ColorForm from "./components/form";
 
 export default async function Home() {

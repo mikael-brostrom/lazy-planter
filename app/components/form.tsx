@@ -21,8 +21,13 @@ const ColorForm = () => {
   // Handle form submission (for now it just logs data)
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Form submitted');
+
+  fetch(`../api/getPlants?color=${formData.color}&isEdible=${formData.agree}`)
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+    //console.log('Form submitted:', formData);
+    //alert('Form submitted');
   };
 
   return (
