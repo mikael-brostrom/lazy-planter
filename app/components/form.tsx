@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { DataItem } from "../api/getPlants/route";
+import plantInfo from "./plantInfo";
 
 const ColorForm = () => {
   // State to handle form inputs
@@ -12,6 +13,8 @@ const ColorForm = () => {
 
   // State to store fetched plants
   const [plants, setPlants] = useState<DataItem[]>([]);
+  const [plantData, setPlantData] = useState(null);
+
 
   // Handle changes to select and checkbox
   const handleChange = (e) => {
@@ -42,9 +45,8 @@ const ColorForm = () => {
     <div className="container mx-auto p-4">
   <form onSubmit={handleSubmit} className="mb-8 space-y-6">
     {/* Color Selection */}
-    <div>
-      <label htmlFor="color" className="block text-sm font-medium text-black flex justify-center">
-        Choose a color:
+    <div className="flex justify-center">
+      <label htmlFor="color">
       </label>
       <select
         id="color"
@@ -52,7 +54,7 @@ const ColorForm = () => {
         value={formData.color}
         onChange={handleChange}
         required
-        className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 
+        className="w-40 p-2 text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 
 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
       >
         <option value="">Select a color</option>
@@ -60,6 +62,7 @@ focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         <option value="blue">Blue</option>
         <option value="green">Green</option>
         <option value="yellow">Yellow</option>
+        <option value="white">White</option>
       </select>
     </div>
 
@@ -71,11 +74,10 @@ focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         name="agree"
         checked={formData.agree}
         onChange={handleChange}
-        required
         className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
       />
       <label htmlFor="agree" className="ml-2 block text-sm font-medium text-black">
-        Is eatable
+        Is edible
       </label>
     </div>
 
@@ -95,6 +97,16 @@ duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-op
     {plants.map((plant) => (
       <li
         key={plant.id}
+        onClick={() =>  
+          fetch(`/api/getPlant?id=${plant.id}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    setPlantData(data);
+                })
+                .catch((error) => {
+                    console.error('Error fetching plant data:', error);
+                })
+        }
         className="bg-green-600 rounded-lg overflow-hidden shadow-md flex items-center space-x-4 p-6"
       >
         <h3 className="text-xl font-semibold">{plant.common_name}</h3>
@@ -108,6 +120,9 @@ duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-op
       </li>
     ))}
   </ul>
+  {plantData && (
+    <div>Hello</div>
+  )}
 </div>
 
   );
