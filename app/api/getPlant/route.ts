@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
     const plantId = searchParams.get('id');
 
-    const response = await fetch(`https://trefle.io/api/v1/plants/${plantId}?token=6qFhcmK4d9RI5oJZhbKGlt7VfA4OUcuvBL4cA2lpPQQ`);
+    const response = await fetch(`https://trefle.io/api/v1/plants/${plantId}?token=${process.env.TREFLE_API}`);
     const data: Response = await response.json();
     // console.log(data)
 

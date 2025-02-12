@@ -40,9 +40,9 @@ export async function GET(request: NextRequest) {
     const color = searchParams.get('color');
     const isEdible = searchParams.get('isEdible');
 
-    const response = await fetch(`https://trefle.io/api/v1/plants?token=6qFhcmK4d9RI5oJZhbKGlt7VfA4OUcuvBL4cA2lpPQQ&filter[flower_color]=${color}&filter[edible]=${isEdible}`);
+    const response = await fetch(`https://trefle.io/api/v1/plants?token=${process.env.TREFLE_API}&[flower_color]=${color}&filter[edible]=${isEdible}`);
     const data: Response = await response.json();
-    // console.log(data)
+    console.log(data)
 
 
     const filteredData = data.data.map(item => ({
