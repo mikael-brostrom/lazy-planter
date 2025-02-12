@@ -10,7 +10,7 @@ interface Links {
     genus: string;
 }
 
-interface DataItem {
+export interface DataItem {
     id: number;
     common_name: string;
     slug: string;
