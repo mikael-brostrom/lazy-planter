@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { DataItem } from "../api/getPlants/route";
 import plantInfo from "./plantInfo";
+import PlantInfo from "./plantInfo";
 
 const ColorForm = () => {
   // State to handle form inputs
@@ -121,7 +122,9 @@ duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-op
     ))}
   </ul>
   {plantData && (
-    <div>Hello</div>
+    <div>
+      <PlantInfo plantData={plantData}></PlantInfo>
+    </div>
   )}
 </div>
 
