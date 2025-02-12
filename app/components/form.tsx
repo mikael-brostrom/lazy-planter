@@ -39,68 +39,77 @@ const ColorForm = () => {
   };
 
   return (
+    <div className="container mx-auto p-4">
+  <form onSubmit={handleSubmit} className="mb-8 space-y-6">
+    {/* Color Selection */}
     <div>
-      <form onSubmit={handleSubmit}>
-        {/* Color Selection */}
-        <div>
-          <label htmlFor="color">Choose a color:</label>
-          <select
-            id="color"
-            name="color"
-            value={formData.color}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select a color</option>
-            <option value="red">Red</option>
-            <option value="blue">Blue</option>
-            <option value="green">Green</option>
-            <option value="yellow">Yellow</option>
-          </select>
-        </div>
-
-        {/* Checkbox */}
-        <div>
-          <label htmlFor="agree">
-            <input
-              type="checkbox"
-              id="agree"
-              name="agree"
-              checked={formData.agree}
-              onChange={handleChange}
-              required
-            />
-            Is eatable
-          </label>
-        </div>
-
-        <button
-          type="submit"
-          className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-        >
-          Submit
-        </button>
-      </form>
-
-      {/* Display the fetched plants as an unordered list */}
-      <ul className="flex flex-col space-y-4 bg-slate-500">
-        {plants.map((plant) => (
-          <li
-            key={plant.id}
-            className="gap-4 space p-6 rounded-lg shadow-md flex items-center space-x-4 space-y-4"
-          >
-            <h3 className="text-xl font-semibold">{plant.common_name}</h3>
-            {plant.image_url && (
-              <img
-                src={plant.image_url}
-                alt={plant.common_name}
-                className="w-20 h-20 object-cover rounded"
-              />
-            )}
-          </li>
-        ))}
-      </ul>
+      <label htmlFor="color" className="block text-sm font-medium text-black flex justify-center">
+        Choose a color:
+      </label>
+      <select
+        id="color"
+        name="color"
+        value={formData.color}
+        onChange={handleChange}
+        required
+        className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 
+focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      >
+        <option value="">Select a color</option>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+      </select>
     </div>
+
+    {/* Checkbox */}
+    <div className="flex justify-center">
+      <input
+        type="checkbox"
+        id="agree"
+        name="agree"
+        checked={formData.agree}
+        onChange={handleChange}
+        required
+        className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+      />
+      <label htmlFor="agree" className="ml-2 block text-sm font-medium text-black">
+        Is eatable
+      </label>
+    </div>
+
+<div className="flex justify-center">
+    <button
+      type="submit"
+      className="rounded-full bg-green-600 hover:bg-blue-700 text-white px-4 py-2 transition-colors 
+duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+    >
+      Submit
+    </button>
+    </div>
+  </form>
+
+  {/* Display the fetched plants as an unordered list */}
+  <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {plants.map((plant) => (
+      <li
+        key={plant.id}
+        className="bg-green-600 rounded-lg overflow-hidden shadow-md flex items-center space-x-4 p-6"
+      >
+        <h3 className="text-xl font-semibold">{plant.common_name}</h3>
+        {plant.image_url && (
+          <img
+            src={plant.image_url}
+            alt={plant.common_name}
+            className="w-20 h-20 object-cover rounded"
+          />
+        )}
+      </li>
+    ))}
+  </ul>
+</div>
+
   );
 };
 
